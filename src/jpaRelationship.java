@@ -36,7 +36,9 @@ public class jpaRelationship {
     private Person person;
 
 @ManyToMany
-- There are 2 cases: the joined table has no attribute -> use @ManyToMany, and the joined table has attribute(s) -> create new @Embeddable and 2 @ManyToOne relationship.
+- There are 2 cases:
+If the joined table has no attribute -> use @ManyToMany.
+If the joined table has attribute(s) -> create new @Embeddable composite key and 2 @ManyToOne relationship, or create a new normal Entity and assign 2 @OneToMany relationship.
 
 1. @ManyToMany
     Rule: @ManyToMany is used in both classes, with no distinction in mappedBy position. Optionally use @JoinTable to declare name.
@@ -54,5 +56,38 @@ public class jpaRelationship {
         in Address:
     @ManyToMany(mappedBy "person")
     private Person person;
+
+2. Composite key
+    Rule: Composite key has to be @Embeddable, implements Serializable, hashcode(), and equals().
+    New Entity contains composite key and the keys of the 2 classes.
+
+    for example: class Person & class Address.
+
+    @Embeddable
+    class PersonAddressKey implements Serializable {
+        @Column(name = "person_id")
+        Long person_id;
+
+        @Column(name = "address_id")
+        Long address_id;
+
+        //remeber to implement hashcode() and equals()
+    }
+
+    class PersonAddress {
+        @EmbeddedId
+        PersonAddressKey id;
+
+        @ManyToOne
+        @MapsId("personId")
+        Person person;
+
+        same for address;
+
+        the additional attributes;
+    }
+
+3. Join table entity
+    
      */
 }
