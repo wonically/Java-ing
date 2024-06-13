@@ -34,5 +34,25 @@ public class jpaRelationship {
     @ManyToOne
     @JoinColumn(name = "address_id", referenceColumnName = "id") -> use if you want to set a name for the joined column
     private Person person;
+
+@ManyToMany
+- There are 2 cases: the joined table has no attribute -> use @ManyToMany, and the joined table has attribute(s) -> create new @Embeddable and 2 @ManyToOne relationship.
+
+1. @ManyToMany
+    Rule: @ManyToMany is used in both classes, with no distinction in mappedBy position. Optionally use @JoinTable to declare name.
+
+    for example: class Person & class Address
+
+        in Person:
+    @ManyToMany
+    @JoinTable(
+        name = "course_like",
+        joinColumns = @JoinColumn(name = "person_id"),
+        inverseJoinColumns = @JoinColumn(name = "address_id")) -> optional
+    private Address address;
+
+        in Address:
+    @ManyToMany(mappedBy "person")
+    private Person person;
      */
 }
