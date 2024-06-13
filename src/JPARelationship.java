@@ -1,4 +1,4 @@
-public class jpaRelationship {
+public class JPARelationship {
     /*
 @OneToOne
     Rule: @JoinColumn is used in the owned class (class with FK), owning class with PK doesn't need it.
