@@ -57,7 +57,7 @@ If the joined table has attribute(s) -> create new @Embeddable composite key and
     @ManyToMany(mappedBy "person")
     private Person person;
 
-2. Composite key
+2. Composite key (2 PKs are part of the join table PK)
     Rule: Composite key has to be @Embeddable, implements Serializable, hashcode(), and equals().
     New Entity contains composite key and the keys of the 2 classes.
 
@@ -86,8 +86,10 @@ If the joined table has attribute(s) -> create new @Embeddable composite key and
 
         the additional attributes;
     }
+    Then use @OneToMany(mappedBy...)
+    PersonAddress personAddress; in Person & Address
 
-3. Join table entity
-    
+3. Join table entity (2 PKs are attributes in join entity)
+    Rule: create a new PersonAddress entity with 2 FKs.
      */
 }
