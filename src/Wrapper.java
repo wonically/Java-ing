@@ -21,5 +21,7 @@ public class Wrapper {
         //i = i.intValue(); converts it to int.
         //int n = i; this also does the trick.
         System.out.println(i);
+
+        //Typecasting
     }
 }
