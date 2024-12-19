@@ -22,6 +22,5 @@ public class Wrapper {
         //int n = i; this also does the trick.
         System.out.println(i);
 
-        //Typecasting
     }
 }
